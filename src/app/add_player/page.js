@@ -79,7 +79,7 @@ function App() {
                         className="form-control"
                         id="inputLocation"
                         type="text"
-                        placeholder="Enter your location"
+                        placeholder="Enter your Phone Number"
                       />
                     </div>
                   </div>
