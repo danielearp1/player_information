@@ -1,95 +1,58 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
 
-export default function Home() {
+import React from "react";
+import "./styles.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Card } from "react-bootstrap";
+
+function App() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
+    <div>
+      <div className="container-xl px-4 mt-4">
+        <nav className="nav nav-borders">
+          <a className="nav-link ms-0" href="/">
+            Squad
           </a>
+          <a className="nav-link" href="/invite_player">
+            Invite Player
+          </a>
+        </nav>
+        <hr className="mt-0 mb-4" />
+        <div className="row">
+          <div className="col-xl-4">
+            <div className="card mb-4 mb-xl-0">
+              <div className="card-header">Cancun 2024 - England</div>
+              <div className="card-body text-center">
+                <img
+                  src="https://cdn.britannica.com/44/344-004-494CC2E8/Flag-England.jpg"
+                  width="200"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="col-xl-8">
+            <div className="card mb-4">
+              <div className="card-header">
+                Current Squad - 3 Players Registered
+              </div>
+              <div className="card-body">
+                <Card className="mb-3">
+                  <Card.Body>
+                    David Jones <i className="bi bi-x-square-fill"></i>
+                  </Card.Body>
+                </Card>
+                <Card className="mb-3">
+                  <Card.Body>John Smith</Card.Body>
+                </Card>
+                <Card className="mb-3">
+                  <Card.Body>Steven Adams</Card.Body>
+                </Card>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    </div>
+  );
 }
+export default App;
