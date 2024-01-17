@@ -1,10 +1,37 @@
 "use client";
 
 import React from "react";
-import "../styles.css";
+import "../../styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
-function App() {
+function App({ params }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const addPlayer = async (data) => {
+    const response = await axios.post(
+      `http://localhost:8000/api/add_player/${params.teamID}`,
+      {
+        first_name: data.first_name,
+        last_name: data.last_name,
+        position: data.position,
+        age: data.dob,
+        kit_number: null,
+        cancun_team_id: params.teamID,
+        team: "England",
+        email: data.email,
+        phone_number: data.phone_number,
+        preferred_foot: data.preferred_foot,
+        image: null,
+      }
+    );
+  };
+
   return (
     <div>
       <div className="container-xl px-4 mt-4">
@@ -30,7 +57,7 @@ function App() {
             <div className="card mb-4">
               <div className="card-header">Players Details</div>
               <div className="card-body">
-                <form>
+                <form onSubmit={handleSubmit(addPlayer)}>
                   <div className="row gx-3 mb-3">
                     <div className="col-md-4">
                       <label className="small mb-1">First name</label>
@@ -39,7 +66,13 @@ function App() {
                         id="inputFirstName"
                         type="text"
                         placeholder="Enter your first name"
+                        {...register("first_name", { required: true })}
                       />
+                      {errors.first_name && (
+                        <span style={{ color: "red" }}>
+                          This field is required
+                        </span>
+                      )}
                     </div>
 
                     <div className="col-md-4">
@@ -49,7 +82,13 @@ function App() {
                         id="inputLastName"
                         type="text"
                         placeholder="Enter your last name"
+                        {...register("last_name", { required: true })}
                       />
+                      {errors.last_name && (
+                        <span style={{ color: "red" }}>
+                          This field is required
+                        </span>
+                      )}
                     </div>
                     <div className="col-md-4">
                       <label className="small mb-1">Nickname (Optional)</label>
@@ -58,6 +97,7 @@ function App() {
                         id="inputLastName"
                         type="text"
                         placeholder="Enter a nickname"
+                        {...register("nickname")}
                       />
                     </div>
                   </div>
@@ -70,7 +110,13 @@ function App() {
                         id="inputOrgName"
                         type="text"
                         placeholder="Enter your Email"
+                        {...register("email", { required: true })}
                       />
+                      {errors.email && (
+                        <span style={{ color: "red" }}>
+                          This field is required
+                        </span>
+                      )}
                     </div>
 
                     <div className="col-md-6">
@@ -80,7 +126,13 @@ function App() {
                         id="inputLocation"
                         type="text"
                         placeholder="Enter your Phone Number"
+                        {...register("phone_number", { required: true })}
                       />
+                      {errors.phone_number && (
+                        <span style={{ color: "red" }}>
+                          This field is required
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div className="row">
@@ -89,22 +141,34 @@ function App() {
                       <select
                         className="form-select"
                         aria-label="Default select example"
+                        {...register("preferred_foot", { required: true })}
                       >
-                        <option value="1">Left</option>
-                        <option value="2">Right</option>
+                        <option value="Left">Left</option>
+                        <option value="Right">Right</option>
                       </select>
+                      {errors.preferred_foot && (
+                        <span style={{ color: "red" }}>
+                          This field is required
+                        </span>
+                      )}
                     </div>
                     <div className="mb-3 col-md-6">
                       <label className="small mb-1">Preferred Position</label>
                       <select
                         className="form-select"
                         aria-label="Default select example"
+                        {...register("position", { required: true })}
                       >
-                        <option value="1">Goalkeeper</option>
-                        <option value="2">Defender</option>
-                        <option value="2">Midfielder</option>
-                        <option value="2">Striker</option>
+                        <option value="Goalkeeper">Goalkeeper</option>
+                        <option value="Defender">Defender</option>
+                        <option value="Midfielder">Midfielder</option>
+                        <option value="Striker">Striker</option>
                       </select>
+                      {errors.position && (
+                        <span style={{ color: "red" }}>
+                          This field is required
+                        </span>
+                      )}
                     </div>
                   </div>
 
@@ -117,7 +181,13 @@ function App() {
                         type="date"
                         name="birthday"
                         placeholder="Age (Years)"
+                        {...register("dob", { required: true })}
                       />
+                      {errors.age && (
+                        <span style={{ color: "red" }}>
+                          This field is required
+                        </span>
+                      )}
                     </div>
                     <div className="col-md-6">
                       <label className="small mb-1">Occupation</label>
@@ -127,6 +197,7 @@ function App() {
                         type="input"
                         name="birthday"
                         placeholder="Occupation"
+                        {...register("occupation")}
                       />
                     </div>
                   </div>
@@ -136,6 +207,7 @@ function App() {
                     className="form-control form-control-md mb-3"
                     id="formFileMd"
                     type="file"
+                    {...register("image")}
                   />
 
                   <p className="m-0">Photo guidelines:</p>
@@ -146,7 +218,7 @@ function App() {
                     - Plain light coloured background
                   </p>
 
-                  <button className="btn btn-primary" type="button">
+                  <button className="btn btn-primary" type="submit">
                     Submit Details
                   </button>
                 </form>
